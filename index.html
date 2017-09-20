@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ColoViewer</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+      <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.11.4/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/super-hands@2.0.1/dist/super-hands.min.js"></script>
+    <script src="https://cdn.rawgit.com/tizzle/aframe-orbit-controls-component/v0.1.13/dist/aframe-orbit-controls-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-arrow-component@1.0.0/index.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body onload="startup()">
+    <a-scene>
+      <a-assets timeout="10000">
+        <!-- Colon STL from: http://www.vi3dim.com/med3dviewobjects?lightbox=imageuod -->
+        <a-asset-item id="colon-obj" src="https://cdn.glitch.com/179ba553-7b78-4b66-8789-d53cadfc3925%2Fcolon.obj?1505669189880"></a-asset-item>
+        <a-asset-item id="colon-mtl" src="https://cdn.glitch.com/179ba553-7b78-4b66-8789-d53cadfc3925%2Fcolon.obj.mtl?1505669201136"></a-asset-item>
+      </a-assets>
+      <a-entity  id="camera_cont" rotation="0, 0 0">
+        <a-entity about_face listener="stepFactor:0.05"
+            id="camera"
+            camera="fov: 80; zoom: 2;"
+            position="0 3 5"
+            orbit-controls="
+                autoRotate: false;
+                autoRotateSpeed: .25;
+                target: #target;
+                enableDamping: true;
+                dampingFactor: 0.125;
+                rotateSpeed:0.25;
+                minDistance:3;
+                maxDistance:100;
+                autoVRLookCam: true;
+                "
+            mouse-cursor="">
+            <a-entity geometry="primitive:cone; radius-bottom:1; radius-top:0" scale=".33 1 .33" position="0 0 0" rotation="90 0 0" material="color: #0099ff; transparent: true; opacity:0.5"></a-entity>
+        </a-entity>
+      </a-entity>
+      <a-sky color="#000"></a-sky>
+      <a-plane position="0 0 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-entity id="target" position="0, 2, 0">
+      </a-entity>
+      <a-entity id="colon" grabbable stretchable >
+        <a-entity obj-model="obj: #colon-obj; mtl: #colon-mtl" scale="0.0002 0.0002 0.0002" position="0 1 0" rotation="-90 0 0"></a-entity>
+        <a-entity position="1.63 1.14 .13">
+          <a-entity arrow="length: 1.5" scale="-1 1 1"></a-entity>
+          <a-entity text="value: Gas Introduced Rectally\nfor CT Colonography; width: 2.5; side: double; align: right; anchor: right; font: exo2bold;" position="0 .2 0"></a-entity>
+        </a-entity>
+        <a-entity position="-2 1.8 -.35">
+          <a-entity arrow="length: 1.5" scale="1 1 1"></a-entity>
+          <a-entity text="value: Sigmoidoscopy\nEnd Point; width: 2.5; side: double; align: left; anchor: left; font: exo2bold;" position="0 .2 0"></a-entity>
+        </a-entity>
+        <a-entity position="1.04 1.66 -.133" visible="false">
+          <a-entity arrow="length: 1; color: red" scale="-1 1 1"></a-entity>
+          <a-entity text="value: Polyp; width: 2.5; side: double; align: right; anchor: right; color: white; font: exo2bold;" position="0 .13 0"></a-entity>
+        </a-entity>
+
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
